@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Learning Hub</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  aside {
+    width: 140px;
+    background-color: #1f1f1f;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    border-right: 1px solid #333;
+    transform: translateX(-160px);
+    transition: transform 0.5s ease;
+    z-index: 5;
+  }
+
+  aside.show {
+    transform: translateX(0);
+  }
+
+  .game-btn {
+    background: none;
+    border: 1px solid #444;
+    border-radius: 12px;
+    color: #e0e0e0;
+    font-size: 0.95em;
+    margin: 15px 0;
+    padding: 12px;
+    cursor: pointer;
+    width: 100px;
+    transition: all 0.3s ease;
+  }
+
+  .game-btn:hover {
+    color: #00e676;
+    border-color: #00e676;
+    transform: scale(1.1);
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow: auto;
+    position: relative;
+  }
+
+  iframe {
+    width: 100%;
+    height: 95%;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 0 30px rgba(0,255,118,0.2);
+    transition: all 0.4s ease;
+  }
+
+  #toggleBtn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: #00e676;
+    border: none;
+    border-radius: 8px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.8em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0,230,118,0.5);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  #toggleBtn:hover {
+    transform: rotate(90deg) scale(1.2);
+    box-shadow: 0 0 25px rgba(0,230,118,0.8);
+  }
+</style>
+</head>
+<body>
+  <aside id="sidebar">
+    <button class="game-btn" onclick="loadGame('https://oeyc2014.github.io/RainbowRandoms')">Numbers</button>
+    <button class="game-btn" onclick="loadGame('https://oeyc2014.github.io/WordScramble/')">Scrambler</button>
+    <button class="game-btn" onclick="loadGame('https://oeyc2014.github.io/TheAdditionGame')">Math</button>
+  </aside>
+
+  <button id="toggleBtn">☰</button>
+
+  <main>
+    <iframe id="gameFrame" src=""></iframe>
+  </main>
+
+<script>
+const sidebar = document.getElementById('sidebar');
+const toggleBtn = document.getElementById('toggleBtn');
+let sidebarVisible = false;
+
+toggleBtn.addEventListener('click', () => {
+  sidebarVisible = !sidebarVisible;
+  sidebar.classList.toggle('show', sidebarVisible);
+});
+
+function loadGame(url) {
+  document.getElementById('gameFrame').src = url;
+  if(sidebarVisible){
+    sidebarVisible = false;
+    sidebar.classList.remove('show');
+  }
+}
+</script>
+</body>
+</html>
